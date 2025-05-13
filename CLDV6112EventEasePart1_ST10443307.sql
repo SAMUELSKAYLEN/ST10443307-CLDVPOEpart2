@@ -11,7 +11,7 @@ CREATE TABLE Venues(
 	VenueName VARCHAR(250) NOT NULL,
 	VenueLocation VARCHAR(250) NOT NULL,
 	VenueCapacity INT NOT NULL,
-	ImageURL NVARCHAR(100) NOT NULL,
+	ImageURL NVARCHAR(500) NOT NULL,
 );
 
 INSERT INTO Venues(VenueName, VenueLocation, VenueCapacity, ImageURL)
@@ -52,8 +52,8 @@ VALUES ('2024-07-4', 1, 1),
 
 SELECT * FROM Bookings;
 
-ALTER TABLE Venues
-ALTER COLUMN ImageURL NVARCHAR(500);
+--ALTER TABLE Venues
+--ALTER COLUMN ImageURL NVARCHAR(500);
 
-SELECT * FROM Venues;
+--SELECT * FROM Venues;
 
