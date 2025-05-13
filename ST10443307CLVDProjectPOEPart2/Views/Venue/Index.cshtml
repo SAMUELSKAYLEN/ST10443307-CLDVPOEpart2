@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ST10443307CLVDProjectPOEPart2.Models.Venue>
+
+@{
+    ViewData["Title"] = "Venue information";
+}
+
+<h1>Venue list</h1>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class = "alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>   
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VENUEID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VenueName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VenueCapacity)
+            </th>
+            <th> 
+                @Html.DisplayNameFor(model => model.VenueLocation) 
+            </th>
+
+            <th>Venue Image</th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VENUEID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueLocation) 
+                </td> 
+                
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageURL))
+                    {
+                        <img src="@item.ImageURL" alt="Venue Image" width="100" height="100" style="object-fit:cover; border-radius:8px;" />
+                    }
+                    else
+                    {
+                        <span>No image</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.VENUEID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.VENUEID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.VENUEID">Delete</a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ST10443307CLVDProjectPOEPart2.Models.Booking>
+
+@{
+    ViewData["Title"] = "Booking information";
+}
+
+<h1>Bookings</h1>
+
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <input type="text" name="searchString" class="form-control" placeholder="Search bookings" />
+    </div>
+    <button type="submit" class="btn-primary mt-2">Search</button>
+</form>
+
+@if(TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+        <div class="alert alert-danger">
+             @error.ErrorMessage
+        </div>
+    }
+}
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Venue</th>
+            <th>Event</th>
+            <th>Booking Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var booking in Model) {
+        <tr>
+            <td>
+               @booking.BOOKINGID
+            </td>
+             <td>
+               @booking.Venue?.VenueName
+             </td>
+             <td>
+               @booking.Event?.EventName
+             </td>
+             <td>
+               @booking.BookingDate.ToString("yyyy-MM-dd")
+             </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@booking.BOOKINGID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@booking.BOOKINGID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@booking.BOOKINGID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
